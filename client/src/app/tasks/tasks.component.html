@@ -1,0 +1,18 @@
+<form (submit)="add(taskTitle.value); taskTitle.value=''">
+	<input #taskTitle placeholder="Task Name">
+	<input type="submit" value="Submit">
+</form>
+
+<table>
+	<tr *ngFor="let task of tasks">
+		<td>
+			<a (click)="edit(task)">
+				<span *ngIf="task!=editTask">{{task.title}}</span>
+				<input *ngIf="task==editTask" [(ngModel)]="task.title" (blur)="update()" (keyup.enter)="update()">
+			</a>
+		</td>
+		<td>
+			<button title="delete task" (click)="delete(task)">Delete</button>
+		</td>
+	</tr>
+</table>

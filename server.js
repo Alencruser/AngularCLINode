@@ -10,29 +10,22 @@ var corsOptions = {
   optionsSuccessStatus: 200 
 };
 
+var tasks = {
+	"Faire ses devoirs": {
+	"id" : 2,
+	"title" : "test"
+	}
+};
+
 app.use(cors(corsOptions));
 
-app.get('/api/cats',(req,res)=>{
-	res.send({
-		cats: [{name : 'lilly'},{name : 'Laska'}]
-	});
+app.get('/tasks', function(req,res,next) {
+	res.json(tasks)
 });
 
-app.get('/api/cats/:name',(req,res)=>{
-	const requestedCatName = req.params['name'];
-	res.send({ name : requestedCatName });
-});
-
-app.post('/api/cats',(req,res)=>{
-	res.send(201, req.body);
-});
-
-app.put('/api/cats/:name',(req,res)=>{
-	res.send(201, req.body);
-});
-
-app.delete('/api/cats/:name',(req,res)=>{
-	res.sendStatus(204);
+app.post('/tasks', function(req,res,next) {
+	var task=req.body;
+	console.log(task);
 });
 
 app.listen(8080,()=>{
